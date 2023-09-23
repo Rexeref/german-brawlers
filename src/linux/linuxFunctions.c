@@ -206,7 +206,7 @@ void printaBarra(float valore, float max, char color)
         printf("\033[0m");
         for(int i=0; i<10; i++)
         {
-            printf("%c", 177);
+            printf("/");
         }
     }
     else if(valore > max)
@@ -215,18 +215,18 @@ void printaBarra(float valore, float max, char color)
         {
             printf("%c", 177);
         }
-        printf("\033[0m");
+        printf("/");
     }
     else
     {
         for(int i=0; i<(valore/max*10); i++)
         {
-            printf("%c", 177);
+            printf("/");
         }
         printf("\033[0m");
         for(int i=0; i< 10 - (valore/max*10); i++)
         {
-            printf("%c", 177);
+            printf("/");
         }
     }
     printf("]");

@@ -7,10 +7,10 @@
 #include <math.h>
 
 
-#ifndef __unix 
-#include "linux/linuxFunctions.h"
+#ifndef __linux__
+#include "linuxFunctions.h"
 #elif _WIN32
-#include "windows/windowsFunctions.h"
+#include "windowsFunctions.h"
 #endif
 
 #define LATOPOR 15

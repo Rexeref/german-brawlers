@@ -1,4 +1,32 @@
 #include "functions.h"
+
+#ifdef __linux__
+#include "linux/linuxFunctions.h"
+
+#define CLEARSCREEN system("clear")
+#define CHECKKEY
+#define NBGETCHAR
+
+#define kbh() kbhit()
+#define gtc() getchar()
+
+
+#elif _WIN32
+#include "windowsFunctions.h"
+
+#include <conio.h>
+#include <windows.h>
+
+#define CLEARSCREEN system("cls")
+#define CHECKKEY _kbhit()
+#define NBGETCHAR getch()
+
+#define kbh() _kbhit()
+#define gtc() _getch()
+#define pts() _cputs()
+
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -88,7 +116,8 @@ pg resetPg(pg personaggio)
     personaggio.exp=2000;
     int oldLevel = personaggio.lvl;
     personaggio=newlevel(personaggio);
-    personaggio.exp=personaggio.deaths*25+oldLevel/2;
+    //personaggio.exp=personaggio.deaths*25+oldLevel/2;
+    personaggio.exp = 0;
     personaggio.lvl = 10;
 
     personaggio.rexp=2000;
@@ -890,6 +919,7 @@ void printMatrice(int matrice[LATOPVE][LATOPOR])
         {
             switch(matrice[i][j])
             {
+            #ifdef _WIN32
             case 0:  // TERRENO
                 printf("\033[37;100m%c%c\033[0m", 177, 177);
                 break;
@@ -907,6 +937,25 @@ void printMatrice(int matrice[LATOPVE][LATOPOR])
                 break;
             default:
                 break;
+            #elif __linux__
+            case 0:  // TERRENO
+                printf("\033[37;100m##\033[0m");
+                break;
+            case 1:  // GIOCATORE
+                printf("\033[36m%%%%\033[0m");
+                break;
+            case 2:  // NEMICO
+                printf("\033[31;100mZZ\033[0m");
+                break;
+            case 3:  // MEDIKIT
+                printf("\033[32;100mMK\033[0m");
+                break;
+            case 4:  // ABILITA'
+                printf("\033[34;100mAB\033[0m");
+                break;
+            default:
+                break;
+            #endif
             }
         }
     }

@@ -3,12 +3,12 @@
 #include <time.h>
 #include <math.h>
 
-#ifndef __unix 
-#include "linuxFunctions.h"
-#elif _WIN32
-#include "windowsFunctions.h"
-#endif
 #include "functions.h"
+#ifndef __linux__
+#include "linux/linuxFunctions.h"
+#elif _WIN32
+#include "windows/windowsFunctions.h"
+#endif
 
 FILE *fatk;
 FILE *fene;
@@ -19,7 +19,7 @@ FILE *save;
 char listatk[40]=".vncprpg\\abilities.data";
 char listene[40]=".vncprpg\\nemici.data";
 char savename[40]=".vncprpg\\save.data";
-#elif __unix
+#elif __linux__
 char listatk[40]=".vncprpg/abilities.data";
 char listene[40]=".vncprpg/nemici.data";
 char savename[40]=".vncprpg/save.data";
