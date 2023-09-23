@@ -63,6 +63,7 @@ int main()
     {
         save=fopen(savename, "w");
         fclose(save);
+        protagonista.deaths = 0;
         protagonista=resetPg(protagonista);
         printPgStats(protagonista);
         savenow(protagonista, savename);
