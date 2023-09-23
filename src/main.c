@@ -3,7 +3,7 @@
 #include <time.h>
 #include <math.h>
 
-#include "functions.h"
+#include "gameFunctions.h"
 #ifndef __linux__
 #include "linux/linuxFunctions.h"
 #elif _WIN32
@@ -63,6 +63,7 @@ int main()
     {
         save=fopen(savename, "w");
         fclose(save);
+        protagonista.deaths = 0;
         protagonista=resetPg(protagonista);
         printPgStats(protagonista);
         savenow(protagonista, savename);

@@ -1,4 +1,4 @@
-#include "functions.h"
+#include "gameFunctions.h"
 
 void abilitySelector(pg* appoggio, enem* nemico, int abilityIndex){
     switch(abilityIndex){

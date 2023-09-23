@@ -1,4 +1,4 @@
-#include "functions.h"
+#include "gameFunctions.h"
 
 #ifdef __linux__
 #include "linux/linuxFunctions.h"
@@ -12,7 +12,7 @@
 
 
 #elif _WIN32
-#include "windowsFunctions.h"
+#include "windows/windowsFunctions.h"
 
 #include <conio.h>
 #include <windows.h>
@@ -116,7 +116,7 @@ pg resetPg(pg personaggio)
     personaggio.exp=2000;
     int oldLevel = personaggio.lvl;
     personaggio=newlevel(personaggio);
-    //personaggio.exp=personaggio.deaths*25+oldLevel/2;
+    personaggio.exp=personaggio.deaths*25+oldLevel/2;
     personaggio.exp = 0;
     personaggio.lvl = 10;
 
@@ -155,7 +155,7 @@ pg resetPg(pg personaggio)
 
 pg newResistanceLevel(pg personaggio){
         cleanS();
-    int i=0, a=0, b=0, c=0, d=0, e=0;
+    int i=0, e=0;
     for(; personaggio.rexp>=100; personaggio.rexp-=100, i++) {}
             printf("\x1b[%d;%dH", 0, 0);
             printf("\n\n\033[93;3mHai %d punti da spendere!\n\033[23mInserire il numero corrispondente ad una delle statistiche indicate:\n\033[0m", i);
@@ -215,6 +215,7 @@ pg newlevel(pg personaggio)
     cleanS();
     int i=0, a=0, b=0, c=0, d=0, e=0;
     for(; personaggio.exp>=100; personaggio.exp-=100, i++, personaggio.lvl++) {}
+            cleanS();
             printf("\x1b[%d;%dH", 0, 0);
             printf("\n\n\033[93;3mHai %d punti da spendere!\n\033[23mInserire il numero corrispondente ad una delle statistiche indicate:\n\033[0m", i);
             printf("-1- Punti Vita        > ");

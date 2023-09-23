@@ -1,7 +1,7 @@
 #ifndef WINDOWSFUNCTIONS_H_INCLUDED
 #define WINDOWSFUNCTIONS_H_INCLUDED
 
-#include "../functions.h"
+#include "gameFunctions.h"
 
 enem menudegiocatore(pg *appoggio, enem nemico, char fileattacco[]);
 void cleanS(void);

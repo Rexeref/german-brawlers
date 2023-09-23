@@ -1,17 +1,10 @@
-#ifndef FUNCTIONS_H_INCLUDED
-#define FUNCTIONS_H_INCLUDED
+#ifndef GAMEFUNCTIONS_H_INCLUDED
+#define GAMEFUNCTIONS_H_INCLUDED
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
-
-
-#ifndef __linux__
-#include "linuxFunctions.h"
-#elif _WIN32
-#include "windowsFunctions.h"
-#endif
 
 #define LATOPOR 15
 #define LATOPVE 10
@@ -112,5 +105,11 @@ void printMatrice(int matrice[LATOPVE][LATOPOR]);
 // Funzioni Utilita' Portabili
 int ifWRound(double number);
 void printSchermataBarreVita(pg personaggio, enem nemico);
+
+#ifdef _WIN32
+#include "windows/windowsFunctions.h"
+#elif __linux__
+#include "linux/linuxFunctions.h"
+#endif
 
 #endif
