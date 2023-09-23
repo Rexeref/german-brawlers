@@ -1,4 +1,4 @@
-#include "functions.h"
+#include "gameFunctions.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>

@@ -3,7 +3,7 @@
 #include <time.h>
 #include <math.h>
 
-#include "functions.h"
+#include "gameFunctions.h"
 #ifndef __linux__
 #include "linux/linuxFunctions.h"
 #elif _WIN32

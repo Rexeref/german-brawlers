@@ -1,5 +1,5 @@
-#ifndef FUNCTIONS_H_INCLUDED
-#define FUNCTIONS_H_INCLUDED
+#ifndef GAMEFUNCTIONS_H_INCLUDED
+#define GAMEFUNCTIONS_H_INCLUDED
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -7,10 +7,10 @@
 #include <math.h>
 
 
-#ifndef __linux__
-#include "linuxFunctions.h"
-#elif _WIN32
-#include "windowsFunctions.h"
+#ifdef _WIN32
+#include "windows/windowsFunctions.h"
+#elif __linux__
+#include "linux/linuxFunctions.h"
 #endif
 
 #define LATOPOR 15
