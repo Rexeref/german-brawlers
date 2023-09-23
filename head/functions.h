@@ -1,22 +1,16 @@
 #ifndef FUNCTIONS_H_INCLUDED
 #define FUNCTIONS_H_INCLUDED
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
 
-#ifdef __unix
-#include <sys/select.h>
-#include <termios.h>
-#include <sys/ioctl.h>
-//#include <stropts.h>
 
-#ifndef _WIN32
-#include "windows/windowsFunctions.h"
-#elif __unix
+#ifndef __unix 
 #include "linux/linuxFunctions.h"
+#elif _WIN32
+#include "windows/windowsFunctions.h"
 #endif
 
 #define LATOPOR 15

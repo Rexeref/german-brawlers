@@ -2,10 +2,13 @@
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
+
+#ifndef __unix 
+#include "linuxFunctions.h"
+#elif _WIN32
+#include "windowsFunctions.h"
+#endif
 #include "functions.h"
-
-
-/// Per l'output grafico impara ad usare SDL2
 
 FILE *fatk;
 FILE *fene;
@@ -13,7 +16,6 @@ FILE *save;
 
 #ifdef _WIN32
 #include <windows.h>
-//#define ENABLE_VIRTUAL_TERMINAL_PROCESSING 0x0004
 char listatk[40]=".vncprpg\\abilities.data";
 char listene[40]=".vncprpg\\nemici.data";
 char savename[40]=".vncprpg\\save.data";
@@ -21,10 +23,6 @@ char savename[40]=".vncprpg\\save.data";
 char listatk[40]=".vncprpg/abilities.data";
 char listene[40]=".vncprpg/nemici.data";
 char savename[40]=".vncprpg/save.data";
-#include <sys/select.h>
-#include <termios.h>
-#include <sys/ioctl.h>
-//#include <stropts.h>
 #endif
 
 int main()
@@ -39,7 +37,10 @@ int main()
     cursorInfo.bVisible = showFlag; // set the cursor visibility
     SetConsoleCursorInfo(out, &cursorInfo);
     #endif // _WIN32
+
     cleanS();
+    
+    
     /// Primo Avvio ///
 
     if(fopen(listatk, "r")==NULL || fopen(listene, "r")==NULL)
