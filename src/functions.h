@@ -12,6 +12,11 @@
 #include <termios.h>
 #include <sys/ioctl.h>
 //#include <stropts.h>
+
+#ifndef _WIN32
+#include "windows/windowsFunctions.h"
+#elif __unix
+#include "linux/linuxFunctions.h"
 #endif
 
 #define LATOPOR 15
@@ -31,18 +36,18 @@ typedef struct{
     char name[255];
     ///Dati combattimento
     int hp; //Punti vita attuali
-    int sp; //Punti abilità attuali
+    int sp; //Punti abilitï¿½ attuali
     ///Stats
     int lvl; //Livello, ogni livello ti permetti di aumentare di 1 una statistica a propria scelta
     int exp; //Ogni 1000 XP si sale di 1 livello
     int rexp; //Punti esperienza per le resistenze
     int mhp; //Vita massima
-    int msp; //Punti abilità massimi (mana)
-    int spd; //Chi ha questa statistica più alta combatte per primo, ogni 10 livelli si aggiunge un attacco in più
-    int pow; //Permette di fare più danni fisici, ogni 2 livelli si può usare un'arma che pesa 1 punto peso in più (I punti peso standard sono 30)
-    int mind; //Permette di fare più danni magici, ogni 5 livelli il costo in SP di una magia diminuisce di 1
+    int msp; //Punti abilitï¿½ massimi (mana)
+    int spd; //Chi ha questa statistica piï¿½ alta combatte per primo, ogni 10 livelli si aggiunge un attacco in piï¿½
+    int pow; //Permette di fare piï¿½ danni fisici, ogni 2 livelli si puï¿½ usare un'arma che pesa 1 punto peso in piï¿½ (I punti peso standard sono 30)
+    int mind; //Permette di fare piï¿½ danni magici, ogni 5 livelli il costo in SP di una magia diminuisce di 1
     ///Altro
-    int abilities[6]; //Indicatori di quali abilità sono accessibili, i dati sono salvati in un file
+    int abilities[6]; //Indicatori di quali abilitï¿½ sono accessibili, i dati sono salvati in un file
     int weapon;
     int posizione;
     int healingKits;
@@ -57,17 +62,17 @@ typedef struct{
     char name[255];
     ///Dati combattimento
     int hp; //Punti vita attuali
-    int sp; //Punti abilità attuali
+    int sp; //Punti abilitï¿½ attuali
     ///Stats
     int lvl; //Livello, ogni livello ti permetti di aumentare di 1 una statistica a propria scelta
     int exp; //Ogni 1000 XP si sale di 1 livello
     int mhp; //Vita massima
-    int msp; //Punti abilità massimi (mana)
-    int spd; //Chi ha questa statistica più alta combatte per primo, ogni 10 livelli si aggiunge un attacco in più
-    int pow; //Permette di fare più danni fisici, ogni 2 livelli si può usare un'arma che pesa 1 punto peso in più (I punti peso standard sono 30)
-    int mind; //Permette di fare più danni magici, ogni 5 livelli il costo in SP di una magia diminuisce di 1
+    int msp; //Punti abilitï¿½ massimi (mana)
+    int spd; //Chi ha questa statistica piï¿½ alta combatte per primo, ogni 10 livelli si aggiunge un attacco in piï¿½
+    int pow; //Permette di fare piï¿½ danni fisici, ogni 2 livelli si puï¿½ usare un'arma che pesa 1 punto peso in piï¿½ (I punti peso standard sono 30)
+    int mind; //Permette di fare piï¿½ danni magici, ogni 5 livelli il costo in SP di una magia diminuisce di 1
     ///Altro
-    int abilities[6]; //Indicatori di quali abilità sono accessibili, i dati sono salvati in un file
+    int abilities[6]; //Indicatori di quali abilitï¿½ sono accessibili, i dati sono salvati in un file
     float powRes;
     float mindRes;
 } enem;
@@ -98,7 +103,6 @@ pg menudebug(pg personaggio, char salvataggio[], char fileattacco[], char filene
 // Fight System
 pg fight(pg personaggio, char fileattacco[], char filenemici[]);
 pg enemyAttack(pg personaggio, enem* nemico, char fileattacco[]);
-enem menudegiocatore(pg* personaggio, enem nemico, char fileattacco[]);
 void printEnemy(enem personaggio);
 enem loadEnemy(int indexEnemyInList, char nomefile[]);
 attack prendidatiattacco(int numero, char fileattacco[]);
@@ -108,17 +112,11 @@ void printAbility(attack attacco);
 void mostraattacchi(pg personaggio, char fileattacco[]);
 
 // Expl
-
 pg esplorazione(pg personaggio, char salvataggio[], char fileattacco[], char filenemici[]);
 void printMatrice(int matrice[LATOPVE][LATOPOR]);
 
 // Funzioni Utilita' Portabili
-void cleanS(void);
-void stop(void);
-void pause(void);
 int ifWRound(double number);
-void printaBarra(float valore, float max, char color);
 void printSchermataBarreVita(pg personaggio, enem nemico);
-int kbhit();
 
 #endif
